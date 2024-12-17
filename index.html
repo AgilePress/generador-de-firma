@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generador de Firma</title>
+    <title>Generador de firma</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -61,10 +61,10 @@
     </style>
 </head>
 <body>
-    <h1>Generador de Firma</h1>
+    <h1>Generador de firma</h1>
     <div class="container">
         <form id="signatureForm">
-            <label for="name">Nombre y Apellidos</label>
+            <label for="name">Nombre y apellidos</label>
             <input type="text" id="name" required>
 
             <label for="job">Puesto</label>
@@ -79,18 +79,18 @@
             <label for="address">Dirección</label>
             <input type="text" id="address" required>
 
-            <label>Código Postal y Ciudad</label>
+            <label>Código postal y ciudad</label>
             <div class="row">
                 <input type="text" id="postalCode" required>
                 <input type="text" id="city" required>
             </div>
 
-            <button type="button" onclick="generateSignature()">Generar Firma</button>
+            <button type="button" onclick="generateSignature()">Generar firma</button>
         </form>
 
         <div id="signaturePreviewContainer">
             <div id="signaturePreview"></div>
-            <button style="margin-top: 10px;" onclick="copySignature()">Copiar Firma</button>
+            <button style="margin-top: 10px;" onclick="copySignature()">Copiar firma</button>
         </div>
     </div>
 
@@ -118,7 +118,7 @@
                 <p style="color:#8C8C8C!important;">
                     <img src="https://marcacorporativa.asepeyo.es/wp-content/uploads/envelope-thin.png" alt="Email" style="width: 16px; height: 16px; margin-right: 8px;vertical-align:middle;">
                     <a href="mailto:${email}" style="color:#8C8C8C!important;text-decoration:none!important;">${email}</a><br>
-                    <img src="https://marcacorporativa.asepeyo.es/wp-content/uploads/phone-thin.png" alt="Phone" style="width: 16px; height: 16px; margin-right: 8px;vertical-align:middle;">
+                    <img src="https://marcacorporativa.asepeyo.es/wp-content/uploads/phone-thin.png" alt="Teléfono" style="width: 16px; height: 16px; margin-right: 8px;vertical-align:middle;">
                     <a href="tel:${phone}" style="color:#8C8C8C!important;text-decoration:none!important;">${phone}</a>
                 </p>
                 <p style="color:#8C8C8C!important;">${address}<br>${postalCode} - ${city}</p>
