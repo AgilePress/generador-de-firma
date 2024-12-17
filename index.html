@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Firma</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        form {
+            flex: 1;
+            max-width: 400px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .row {
+            display: flex;
+            gap: 10px;
+        }
+        .row input {
+            flex: 1;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #signaturePreviewContainer {
+            flex: 1;
+        }
+        #signaturePreview {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Generador de Firma</h1>
+    <div class="container">
+        <form id="signatureForm">
+            <label for="name">Nombre y Apellidos</label>
+            <input type="text" id="name" placeholder="Martín Enrique Martínez Gil" required>
+
+            <label for="job">Puesto</label>
+            <input type="text" id="job" placeholder="Programador web" required>
+
+            <label for="phone">Teléfono</label>
+            <input type="text" id="phone" placeholder="+34 699 280 278" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="mmartinezgil@asepeyo.es" required>
+
+            <label for="address">Dirección</label>
+            <input type="text" id="address" placeholder="Vía Augusta 36, 5ª planta" required>
+
+            <label>Código Postal y Ciudad</label>
+            <div class="row">
+                <input type="text" id="postalCode" placeholder="08006" required>
+                <input type="text" id="city" placeholder="Barcelona" required>
+            </div>
+
+            <button type="button" onclick="generateSignature()">Generar Firma</button>
+        </form>
+
+        <div id="signaturePreviewContainer">
+            <div id="signaturePreview"></div>
+            <button style="margin-top: 10px;" onclick="copySignature()">Copiar Firma</button>
+        </div>
+    </div>
+
+    <script>
+        function generateSignature() {
+            const name = document.getElementById('name').value;
+            const job = document.getElementById('job').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const address = document.getElementById('address').value;
+            const postalCode = document.getElementById('postalCode').value;
+            const city = document.getElementById('city').value;
+
+            const signatureHTML = `
+<table width="700" cellspacing="0" cellpadding="0" border="0" style="padding: 32px 0; font-size:13px;font-weight: 500; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">
+    <tbody>
+        <tr>
+            <td width="150" style="vertical-align:top;padding:4px 16px 0 0">
+                <a href="https://asepeyo.es" data-external="true"><img width="150" style="border:none" src="https://marcacorporativa.asepeyo.es/wp-content/uploads/marca-Asepeyo-107b.jpg"></a>
+            </td>
+            <td style="border-left:solid #d4d4d4 1px" width="16"></td>
+            <td style="vertical-align: middle; text-align:left;color:#222222; text-align:left">
+                <p style="display: block; padding-top: 0px; line-height:0px;color:#222222;font-size:16px; font-weight: bold;">${name}</p>
+                <p style="margin-bottom:16px;color:#4C4C4C;">${job}</p>
+                <p style="color:#8C8C8C!important;">
+                    <img src="https://marcacorporativa.asepeyo.es/wp-content/uploads/envelope-thin.png" alt="Email" style="width: 16px; height: 16px; margin-right: 8px;vertical-align:middle;">
+                    <a href="mailto:${email}" style="color:#8C8C8C!important;text-decoration:none!important;">${email}</a><br>
+                    <img src="https://marcacorporativa.asepeyo.es/wp-content/uploads/phone-thin.png" alt="Phone" style="width: 16px; height: 16px; margin-right: 8px;vertical-align:middle;">
+                    <a href="tel:${phone}" style="color:#8C8C8C!important;text-decoration:none!important;">${phone}</a>
+                </p>
+                <p style="color:#8C8C8C!important;">${address}<br>${postalCode} - ${city}</p>
+            </td>
+        </tr>
+    </tbody>
+</table>`;
+
+            document.getElementById('signaturePreview').innerHTML = signatureHTML;
+        }
+
+        function copySignature() {
+            const signaturePreview = document.getElementById('signaturePreview');
+            const range = document.createRange();
+            range.selectNodeContents(signaturePreview);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+
+            try {
+                document.execCommand('copy');
+                alert('Firma copiada al portapapeles');
+            } catch (err) {
+                console.error('Error al copiar la firma:', err);
+                alert('Hubo un error al copiar la firma');
+            }
+
+            selection.removeAllRanges();
+        }
+    </script>
+</body>
+</html>
