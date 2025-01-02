@@ -92,7 +92,7 @@ function copySignature() {
 
 ## Créditos
 
-Creado por Enrique para su empresa. Puedes personalizarlo según las necesidades de tu negocio.
+Creado por AgilePress Solutions. Puedes personalizarlo según las necesidades de tu negocio.
 
 ---
 
