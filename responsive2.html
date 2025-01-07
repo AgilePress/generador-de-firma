@@ -134,6 +134,18 @@
             const address2 = document.getElementById('address2').value;
             const linkedin = document.getElementById('linkedin').value;
 
+    // Construir la variable phones
+    let phones = `<a href="tel:${phone1}" style="text-decoration:none;color:#333333;padding:0 4px">${phone1}</a>`;
+    if (phone2) {
+        phones += ` | <a href="tel:${phone2}" style="text-decoration:none;color:#333333;padding:0 4px">${phone2}</a>`;
+    }
+
+    // Construir la variable de LinkedIn
+    let linkedinHTML = '';
+    if (linkedin) {
+        linkedinHTML = `<div style="line-height:1.3"><a href="${linkedin}" style="text-decoration:none;color:#333333;">LinkedIn</a></div>`;
+    }
+
             const signatureHTML = `
   <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
@@ -289,12 +301,10 @@
                             <a href="mailto:${email}" style="text-decoration:none;color:#333333;padding: 0 4px">${email}</a>
                             <br />
                             <img src="https://marcacorporativa.asepeyo.es/wp-content/uploads/phone-thin.png" alt="Teléfono" width="12px">
-                            <a href="tel:${phone1}" style="text-decoration:none;color:#333333;padding:0 4px">${phone1}</a> | <a href="tel:${phone2}" style="text-decoration:none;color:#333333;padding:0 4px">${phone2}</a>
+                            ${phones}
                           </div>
                           <p style="line-height:1.3">${address1}<br />${address2}</p>
-                          <div style="line-height:1.3">
-                            <a href="${linkedin}" style="text-decoration:none;color:#333333;">LinkedIn<!-- <img src="https://agilepress.github.io/generador-de-firma/images/linkedin-n.png" alt="Email" width="20px"> --></a>
-                          </div>
+                          ${linkedinHTML}
                         </div>
                       </td>
                     </tr>
