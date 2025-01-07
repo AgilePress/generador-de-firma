@@ -94,7 +94,7 @@
             <label for="linkedin">Linkedin</label>
             <input type="text" id="linkedin" required>
 
-            <button type="button" onclick="generateSignature()">Generar firma</button>
+            <button type="button" onclick="generateSignature()" disabled>Generar firma</button>
         </form>
 
         <div id="signaturePreviewContainer">
@@ -121,6 +121,31 @@
             if (target.tagName === 'INPUT') {
                 localStorage.setItem(target.id, target.value);
             }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('signatureForm');
+            const generateButton = document.getElementById('generateButton');
+            const requiredFields = form.querySelectorAll('[required]');
+        
+            // Función para habilitar/deshabilitar el botón
+            function validateForm() {
+                let allValid = true;
+                requiredFields.forEach((field) => {
+                    if (!field.value.trim()) {
+                        allValid = false;
+                    }
+                });
+                generateButton.disabled = !allValid;
+            }
+        
+            // Escuchar cambios en los campos requeridos
+            requiredFields.forEach((field) => {
+                field.addEventListener('input', validateForm);
+            });
+        
+            // Validar el formulario al cargar la página
+            validateForm();
         });
 
       
